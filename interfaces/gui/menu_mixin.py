@@ -2,7 +2,7 @@ from tkinter import Button
 from logique.notification import lancer_timer_30min
 from logique.applications import *
 
-class AccueilMixin:
+class MenuMixin:
     def menu_principal(self):
         self.afficher_message("\nPassons aux choses sérieuses, que veux-tu faire?\n") # pyright: ignore[reportAttributeAccessIssue]
 

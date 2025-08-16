@@ -5,7 +5,8 @@ import time
 
 from logique.planning import envoyer_whatsapp
 
-class whatsappmixin:
+
+class WhatsAppMixin:
     def envoie(self): 
         for widget in self.frame_boutons.winfo_children(): # pyright: ignore[reportAttributeAccessIssue]
             widget.destroy()
@@ -139,14 +140,13 @@ class whatsappmixin:
         self.afficher_message("D'accord on va s'en passer 😒")     # pyright: ignore[reportAttributeAccessIssue]
         self.fenetre.after(2000, self.retour_menu) # pyright: ignore[reportAttributeAccessIssue]
 
-
     def retour_menu(self):
-    # Nettoyer tous les boutons actuels
+        # Nettoyer tous les boutons actuels
         for widget in self.frame_boutons.winfo_children(): # pyright: ignore[reportAttributeAccessIssue]
             widget.destroy()
 
-    # Afficher message de transition
+        # Afficher message de transition
         self.afficher_message("\n🔄 Retour au menu principal...\n") # pyright: ignore[reportAttributeAccessIssue]
 
-    # Recréer le menu principal
+        # Recréer le menu principal
         self.menu_principal()  # type: ignore

@@ -5,12 +5,12 @@ from tkinter import PhotoImage
 
 from .accueil_mixin import AccueilMixin
 
-# from .menu_mixin import MenuMixin  # Tu ajouteras après
-# from .whatsapp_mixin import WhatsAppMixin  # Tu ajouteras après
-# from .utils_mixin import UtilsMixin  # Tu ajouteras après
+from .menu_mixin import MenuMixin 
+from .whatsapp_mixin import WhatsAppMixin  
 
 
-class AssistantGUI(AccueilMixin):  # Tu ajouteras les autres mixins après
+
+class AssistantGUI(AccueilMixin, MenuMixin, WhatsAppMixin):  
     def __init__(self):
         self.fenetre = Tk()
         self.fenetre.title("🤖 Assistant Personnel")
