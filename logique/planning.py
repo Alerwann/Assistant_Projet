@@ -172,7 +172,7 @@ def send_whatsapp():
            delay 1
            key code 36 using shift down  -- Shift+Entrée 
            delay 0.3
-           keystroke "Ce night on mange : {message[2]}."
+           keystroke "Ce soir on mange : {message[2]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3

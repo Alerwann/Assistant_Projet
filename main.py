@@ -15,7 +15,7 @@ def main():
 
     while True:
         try:
-            choice = input("Votre choice (1 ou 2) : ").strip()
+            choice = input("Votre choix (1 ou 2) : ").strip()
 
             if choice == "1":
                 print("Lancement du mode CLI...")
