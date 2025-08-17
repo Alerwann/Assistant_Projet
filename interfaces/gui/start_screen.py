@@ -47,7 +47,7 @@ class AssistantGUI(
             icon = PhotoImage(file=icon_path)
             self.fenetre.iconphoto(True, icon)
         except Exception as e:
-            print(f"Impossible de donwload l'icône : {e}")
+            print(f"Impossible de download l'icône : {e}")
 
         # Démarrer
         self.welcom_screen()  # Méthode héritée d'AccueilMixin

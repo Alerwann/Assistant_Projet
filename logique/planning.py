@@ -9,7 +9,18 @@ import subprocess
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
 
-def donwload_planning_cvs():
+def download_planning_csv():
+    """
+    Importe le fichier cvs du planning de la semaine
+
+    Utilise CSV pour le traitement du fichier et convertir chaque ligne en dict
+
+    Returns:
+        list[Dict|str,str]] contenant les infos de chaque jour: Menu du midi, Menu du soir, Rendez-vous, Crème du soir, Mot doux
+
+    Raises:
+        FileNotFoundError: Si le fichier CSV n'existe pas
+    """
     planning = []
     with open(
         "/Users/alerwann/Desktop/menu.csv", newline="", encoding="utf-8"
@@ -20,32 +31,58 @@ def donwload_planning_cvs():
     return planning
 
 
-def get_daily_information(jour_nom):
-    planning = donwload_planning_cvs()
+def get_daily_information(day_name):
+    """
+    Récupère les informations de planning pour un jour donné.
+
+     Args:
+         day_name (str): Nom du jour de la semaine (ex: "lundi")
+
+     Returns :
+        
+         Dict[str, str]: Dictionnaire contenant les infos du jour
+         ou dictionnaire vide si pas trouvé
+    """
+    planning = download_planning_csv()
     for jour in planning:
-        if jour["Jour"].lower() == jour_nom.lower():
+        if jour["Jour"].lower() == day_name.lower():
             return jour
     return {}
 
 
 def create_daily_message():
-    daily_date = dt.date.today().strftime("%A").lower()
+    """
+        A partir des informations du jour, crée le message à envoyer.
 
-    daily_planning = get_daily_information(daily_date)
+        Returns:
+           list[str,str,str,str,str] ex: ["lundi","pates","soupe","12h medecin","jaune","je t'aime"]
+    """
+    current_day = dt.date.today().strftime("%A").lower()
+
+    daily_planning = get_daily_information(current_day)
 
     midi = daily_planning.get("Menu du midi", "").strip() or "Pas de repas à midi"
-    night = daily_planning.get("Menu du night", "").strip() or "Pas de repas prévu"
+    evening = daily_planning.get("Menu du soir", "").strip() or "Pas de repas prévu"
     meeting = daily_planning.get("Rendez-vous", "").strip() or "Pas de rdv"
-    creame = daily_planning.get("Crème du night", "").strip() or "Demande moi au cas où"
-    love_message = (
-        daily_planning.get("Message doux", "").strip() or "Je t'aime mon bébé d'amour"
+    cream = daily_planning.get("Crème du soir", "").strip() or "Demande moi au cas où"
+    love_message = (daily_planning.get("Message doux", "").strip() or "Je t'aime mon bébé d'amour"
     )
-    messsage = [daily_date, midi, night, meeting, creame, love_message]
-    # message=f"Coucou Bébé ❤️ \n C'est {daily_date} aujourd'hui. À midi on manges : {midi}. Ce night tu auras : {night}. \n Les choses importantes pour aujourd'hui: {meeting}.\n Ce night ce sera la crème {creame} pour ton torse.\n Et surtout n'oublie pas : {love_message}"
+    messsage = [current_day, midi, evening, meeting, cream, love_message]
+    # message=f"Coucou Bébé ❤️ \n C'est {current_day} aujourd'hui. À midi on manges : {midi}. Ce soir tu auras : {evening}. \n Les choses importantes pour aujourd'hui: {meeting}.\n Ce soir ce sera la crème {cream} pour ton torse.\n Et surtout n'oublie pas : {love_message}"
     return messsage
 
 
 def must_send_message(response_send):
+    """
+    Choix si l'utilisateur veut envoyer le message quotidien
+
+    Args:
+        response_send (str): Réponse de l'utilisateur ('y' pour oui, 'n' pour non)
+
+    Return:
+        str: Message demandant quand envoyer si 'y', ou message de refus
+            si 'n'. Exemple: "D'accord on va s'en passer 😒"
+    """
     if response_send == "y":
 
         return "Maintenant ou plus tard? ⏰"
@@ -54,15 +91,21 @@ def must_send_message(response_send):
         return "D'accord on va s'en passer 😒"
 
 
-def horaire_choice(response_heure):
-    if response_heure == "maintenant":
-        heure = datetime.now()
-    else:
-        heure = response_heure
-    return heure
-
-
 def send_whatsapp():
+    """
+    Envoie un message WhatsApp automatisé avec le planning du jour.
+
+    Utilise AppleScript pour automatiser l'envoi d'un message 
+
+    Returns:
+        bool: True si envoi réussi, False sinon
+
+    Raises:
+        subprocess.CalledProcessError: Si l'exécution AppleScript échoue
+
+    Note:
+        Nécessite que WhatsApp soit installé sur macOS
+    """
     message = create_daily_message()
 
     nom_du_contact = "marie guehl"
@@ -173,6 +216,17 @@ def send_whatsapp():
 
 
 def must_send_message_cli(reponse):
+    """
+    Action effectué suivant le choix d'envoie du message
+
+    Args:
+        str: "y" pour oui "n" pour non
+
+    Returns:
+        pour 'y' envoie le message et retoune str pour valider
+        pour 'n' ou autre texte : str
+        exemple: "On va faire sans 😒"
+    """
 
     if reponse == "y":
         send_whatsapp()

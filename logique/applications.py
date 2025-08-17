@@ -25,7 +25,7 @@ def choice_1():
     )
 
 
-def treatement_choice_app(choice_app):
+def treatment_choice_app(choice_app):
     if choice_app == "1":
         choice_1()
         return "J'espère que cela ne sera pas douloureux 😅"

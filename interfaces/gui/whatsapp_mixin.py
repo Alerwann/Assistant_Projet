@@ -16,7 +16,7 @@ class WhatsAppMixin:
             "Quand veux tu l'envoyer?"
         )  # pyright: ignore[reportAttributeAccessIssue]
 
-        self.envoi_now = IntVar()
+        self.send.now = IntVar()
 
         # Checkbox "Maintenant"
         btnCheck = Checkbutton(

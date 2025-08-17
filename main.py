@@ -3,10 +3,11 @@
 # Auteur: Alerwann
 
 from interfaces.gui import AssistantGUI
-from interfaces.cli import assistant_cly
+from interfaces.cli import assistant_cli
 
 
 def main():
+    """Choix du type d'interface graphique ou non et début du main"""
     print("=== Mon Application ===")
     print("Choisissez le mode d'interface :")
     print("1. Interface en ligne de commande (CLI)")
@@ -18,7 +19,7 @@ def main():
 
             if choice == "1":
                 print("Lancement du mode CLI...")
-                assistant_cly()
+                assistant_cli()
                 break
             elif choice == "2":
                 print("Lancement du mode GUI...")
