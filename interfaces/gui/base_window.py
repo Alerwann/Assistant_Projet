@@ -5,11 +5,14 @@ from tkinter import PhotoImage
 
 from .accueil_mixin import AccueilMixin
 
-from .menu_mixin import MenuMixin 
-from .whatsapp_mixin import WhatsAppMixin  
+from .menu_mixin import MenuMixin
+from .whatsapp_mixin import WhatsAppMixin
 
 
-class AssistantGUI(    WhatsAppMixin,AccueilMixin,MenuMixin,
+class AssistantGUI(
+    WhatsAppMixin,
+    AccueilMixin,
+    MenuMixin,
 ):
     def __init__(self):
         self.fenetre = Tk()
@@ -21,16 +24,18 @@ class AssistantGUI(    WhatsAppMixin,AccueilMixin,MenuMixin,
         self.messages.pack(pady=10)
 
         # Zone boutons
-        self.frame_boutons = Frame(self.fenetre)
-        self.frame_boutons.pack(pady=10)
+        self.frame_button = Frame(self.fenetre)
+        self.frame_button.pack(pady=10)
 
         # Zone de bouton quitter
         self.frame_quit_button = Frame(self.fenetre)
         self.frame_quit_button.pack(pady=10)
 
         # Bouton Quitter permanent
-        btn_quitter = Button(self.frame_quit_button, text="❌ Quitter", command=self.quitter_complet )
-        btn_quitter.pack(side="left", padx=10)
+        quit_btn = Button(
+            self.frame_quit_button, text="❌ Quitter", command=self.quitter_complet
+        )
+        quit_btn.pack(side="left", padx=10)
 
         # Changement icon
         try:
@@ -42,19 +47,19 @@ class AssistantGUI(    WhatsAppMixin,AccueilMixin,MenuMixin,
             icon = PhotoImage(file=icon_path)
             self.fenetre.iconphoto(True, icon)
         except Exception as e:
-            print(f"Impossible de charger l'icône : {e}")
+            print(f"Impossible de donwload l'icône : {e}")
 
         # Démarrer
         self.ecran_accueil()  # Méthode héritée d'AccueilMixin
         self.fenetre.mainloop()
 
-    def afficher_message(self, message):
+    def show_message(self, message):
         self.messages.insert("end", message + "\n")
         self.messages.see("end")
 
     def quitter_complet(self):
         """Arrête tout, y compris le timer"""
-        self.afficher_message("Tu quittes la page et le timer va être annulé")
+        self.show_message("Tu quittes la page et le timer va être annulé")
         import os
 
         os._exit(0)

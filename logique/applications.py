@@ -2,16 +2,16 @@ import subprocess
 import time
 
 
-def choix_3():
- 
+def choice_3():
+
     subprocess.run(["open", "/Applications/Visual Studio Code.app"])
 
 
-def choix_2():
+def choice_2():
     subprocess.run(["open", "/Applications/GeForceNOW.app"])
 
 
-def choix_1():
+def choice_1():
 
     subprocess.Popen(
         [
@@ -25,14 +25,15 @@ def choix_1():
     )
 
 
-def traitement_choix_app (choix_app):
-    if choix_app =='1':
-        choix_1()
+def treatement_choice_app(choice_app):
+    if choice_app == "1":
+        choice_1()
         return "J'espère que cela ne sera pas douloureux 😅"
-    elif choix_app=='2':
-        choix_2()
+    elif choice_app == "2":
+        choice_2()
         return "un peu de détente ça fait plaisir 🕹️"
-    elif choix_app=='3':
-        choix_3()
+    elif choice_app == "3":
+        choice_3()
         return "Rappelle toi que tu es doué"
-    else :return "On peut ne rien faire aussi en effet 🤣"
+    else:
+        return "On peut ne rien faire aussi en effet 🤣"

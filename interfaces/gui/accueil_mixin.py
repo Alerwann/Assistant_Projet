@@ -1,39 +1,48 @@
 from tkinter import Button
-from logique.sommeil import traiter_reponse_sommeil
+from logique.sommeil import treat_resp_sleep
 
 
 class AccueilMixin:
     def ecran_accueil(self):
-      
 
-        self.afficher_message("👋 Salut Mon Maître") # pyright: ignore[reportAttributeAccessIssue]
-        self.afficher_message("👀 Comment tu vas?") # pyright: ignore[reportAttributeAccessIssue]
-        self.afficher_message("Tu as bien dormi? 🤔\n") # pyright: ignore[reportAttributeAccessIssue]
+        self.show_message(
+            "👋 Salut Mon Maître"
+        )  # pyright: ignore[reportAttributeAccessIssue]
+        self.show_message(
+            "👀 Comment tu vas?"
+        )  # pyright: ignore[reportAttributeAccessIssue]
+        self.show_message(
+            "Tu as bien dormi? 🤔\n"
+        )  # pyright: ignore[reportAttributeAccessIssue]
 
         # Boutons Y/N
-        btn_oui = Button(
-            self.frame_boutons, # pyright: ignore[reportAttributeAccessIssue]
+        yes_btn = Button(
+            self.frame_button,  # pyright: ignore[reportAttributeAccessIssue]
             text="😊 Oui",
-            command=lambda: self.repondre_sommeil("y"),
+            command=lambda: self.rep_sleep("y"),
         )
-        btn_non = Button(
-            self.frame_boutons, # pyright: ignore[reportAttributeAccessIssue]
+        no_btn = Button(
+            self.frame_button,  # pyright: ignore[reportAttributeAccessIssue]
             text="😴 Non",
-            command=lambda: self.repondre_sommeil("n"),
+            command=lambda: self.rep_sleep("n"),
         )
 
-        btn_oui.pack(side="left", padx=10)
-        btn_non.pack(side="left", padx=10)
+        yes_btn.pack(side="left", padx=10)
+        no_btn.pack(side="left", padx=10)
 
-    def repondre_sommeil(self, reponse):
+    def rep_sleep(self, reponse):
         # Import uniquement ici pour éviter les imports circulaires
 
-        message = traiter_reponse_sommeil(reponse)
-        self.afficher_message(message) # pyright: ignore[reportAttributeAccessIssue]
+        message = treat_resp_sleep(reponse)
+        self.show_message(message)  # pyright: ignore[reportAttributeAccessIssue]
 
         # Nettoyer les boutons
-        for widget in self.frame_boutons.winfo_children(): # pyright: ignore[reportAttributeAccessIssue]
+        for (
+            widget
+        ) in (
+            self.frame_button.winfo_children()
+        ):  # pyright: ignore[reportAttributeAccessIssue]
             widget.destroy()
 
         # Créer un stub temporaire
-        self.envoie_message() # pyright: ignore[reportAttributeAccessIssue]
+        self.send_message()  # pyright: ignore[reportAttributeAccessIssue]

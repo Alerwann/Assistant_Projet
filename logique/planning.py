@@ -8,7 +8,8 @@ import subprocess
 # Configurer en français
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
 
-def charger_planning_cvs():
+
+def donwload_planning_cvs():
     planning = []
     with open(
         "/Users/alerwann/Desktop/menu.csv", newline="", encoding="utf-8"
@@ -19,46 +20,52 @@ def charger_planning_cvs():
     return planning
 
 
-def obtenir_info_jour(jour_nom):
-    planning=charger_planning_cvs()
+def get_daily_information(jour_nom):
+    planning = donwload_planning_cvs()
     for jour in planning:
         if jour["Jour"].lower() == jour_nom.lower():
             return jour
     return {}
 
-def generer_message_du_jour():
-    date_jour = dt.date.today().strftime("%A").lower()
 
-    planning_du_jour= obtenir_info_jour(date_jour)
+def create_daily_message():
+    daily_date = dt.date.today().strftime("%A").lower()
 
-    midi=planning_du_jour.get('Menu du midi',"").strip() or "Pas de repas à midi"
-    soir = planning_du_jour.get("Menu du soir","").strip() or  "Pas de repas prévu"
-    rendezvous= planning_du_jour.get('Rendez-vous',"").strip() or 'Pas de rdv'
-    creme=planning_du_jour.get("Crème du soir","").strip() or  'Demande moi au cas où'
-    message_love=planning_du_jour.get('Message doux',"").strip() or  "Je t'aime mon bébé d'amour"
-    messsage = [date_jour,midi, soir, rendezvous, creme, message_love]
-    # message=f"Coucou Bébé ❤️ \n C'est {date_jour} aujourd'hui. À midi on manges : {midi}. Ce soir tu auras : {soir}. \n Les choses importantes pour aujourd'hui: {rendezvous}.\n Ce soir ce sera la crème {creme} pour ton torse.\n Et surtout n'oublie pas : {message_love}"
+    daily_planning = get_daily_information(daily_date)
+
+    midi = daily_planning.get("Menu du midi", "").strip() or "Pas de repas à midi"
+    night = daily_planning.get("Menu du night", "").strip() or "Pas de repas prévu"
+    meeting = daily_planning.get("Rendez-vous", "").strip() or "Pas de rdv"
+    creame = daily_planning.get("Crème du night", "").strip() or "Demande moi au cas où"
+    love_message = (
+        daily_planning.get("Message doux", "").strip() or "Je t'aime mon bébé d'amour"
+    )
+    messsage = [daily_date, midi, night, meeting, creame, love_message]
+    # message=f"Coucou Bébé ❤️ \n C'est {daily_date} aujourd'hui. À midi on manges : {midi}. Ce night tu auras : {night}. \n Les choses importantes pour aujourd'hui: {meeting}.\n Ce night ce sera la crème {creame} pour ton torse.\n Et surtout n'oublie pas : {love_message}"
     return messsage
 
-def doit_envoyer_message(response_envoie):
-    if response_envoie=='y':
-        
-        return 'Maintenant ou plus tard? ⏰'
-    else :
-        
+
+def must_send_message(response_send):
+    if response_send == "y":
+
+        return "Maintenant ou plus tard? ⏰"
+    else:
+
         return "D'accord on va s'en passer 😒"
 
 
-def choix_horaire(response_heure):
-    if response_heure=='maintenant':
-        heure=datetime.now()
-    else :heure=response_heure
+def horaire_choice(response_heure):
+    if response_heure == "maintenant":
+        heure = datetime.now()
+    else:
+        heure = response_heure
     return heure
 
-def envoyer_whatsapp():
-    message =generer_message_du_jour()
 
-    nom_du_contact= "marie guehl"
+def send_whatsapp():
+    message = create_daily_message()
+
+    nom_du_contact = "marie guehl"
 
     script_applescript = f"""
 
@@ -121,7 +128,7 @@ def envoyer_whatsapp():
            delay 1
            key code 36 using shift down  -- Shift+Entrée 
            delay 0.3
-           keystroke "Ce soir on mange : {message[2]}."
+           keystroke "Ce night on mange : {message[2]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
@@ -129,7 +136,7 @@ def envoyer_whatsapp():
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
-           keystroke "Ce soir tu mets la crème : {message[4]}."
+           keystroke "Ce night tu mets la crème : {message[4]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
@@ -147,7 +154,7 @@ def envoyer_whatsapp():
     end tell
 
      """
-    script_debug = '''
+    script_debug = """
     tell application "WhatsApp"
         activate
     end tell
@@ -157,7 +164,7 @@ def envoyer_whatsapp():
         return entire contents
     end tell
     end tell
-    '''
+    """
     try:
         subprocess.run(["osascript", "-e", script_applescript], check=True)
         return True
@@ -165,17 +172,14 @@ def envoyer_whatsapp():
         return False
 
 
+def must_send_message_cli(reponse):
 
-
-
-def doit_envoyer_message_cli(reponse):
-
-    if reponse=='y':
-        envoyer_whatsapp()
+    if reponse == "y":
+        send_whatsapp()
         return "C'est envoyé"
 
-    elif reponse=='n':
+    elif reponse == "n":
         return "On va faire sans 😒"
 
     else:
-        return "J'ai compris tu veux pas répondre à mes choix🤣"
+        return "J'ai compris tu veux pas répondre à mes choice🤣"

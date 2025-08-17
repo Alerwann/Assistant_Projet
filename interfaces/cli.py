@@ -3,30 +3,30 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from logique.sommeil import traiter_reponse_sommeil
-from logique.notification import lancer_timer_30min
-from logique.planning import doit_envoyer_message_cli
-from logique.applications import traitement_choix_app
+from logique.sommeil import treat_resp_sleep
+from logique.notification import send_30min_timer
+from logique.planning import must_send_message_cli
+from logique.applications import treatement_choice_app
 
 
 def assistant_cly():
     print("Salut je suis ton assistant préféré")
-    choix_dormir=input("Tu as bien dormi? y/n \n")
-    result_sommeil=traiter_reponse_sommeil(choix_dormir)
-    print(result_sommeil,"\n")
-    
-    lancer_timer_30min()
-    print("j'au lancé le timer pour savoir quand tu pourras déjeuner!🤤 \n" )
-  
-    choix_message = input("Veux tu envoyer le message du jour? y/n \n")
-    print(doit_envoyer_message_cli(choix_message),"\n")
+    sleep_choice = input("Tu as bien dormi? y/n \n")
+    slepp_result = treat_resp_sleep(sleep_choice)
+    print(slepp_result, "\n")
+
+    send_30min_timer()
+    print("j'au lancé le timer pour savoir quand tu pourras déjeuner!🤤 \n")
+
+    message_choice = input("Veux tu sendle message du jour? y/n \n")
+    print(must_send_message_cli(message_choice), "\n")
 
     print("Passons aux choses sérieuses")
     print("Quelle application veux tu lancer ?\n")
-    choix_app =input("Choix 1: La gestion des comptes \nChoix 2 : Jouer\nChoix 3 : Faire du code \n")
-    print(traitement_choix_app(choix_app))
-    
-    
-    
+    app_choice = input(
+        "Choix 1: La gestion des comptes \nChoix 2 : Jouer\nChoix 3 : Faire du code \n"
+    )
+    print(treatement_choice_app(app_choice))
+
 
 assistant_cly()

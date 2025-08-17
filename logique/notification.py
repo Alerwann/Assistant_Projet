@@ -4,7 +4,7 @@ import threading
 import subprocess
 
 
-def envoyer_notifiaction_petit_dej():
+def send_breakfast_notification():
     time.sleep(5)
     subprocess.run(
         [
@@ -21,12 +21,12 @@ def envoyer_notifiaction_petit_dej():
     )
 
 
-def lancer_timer_30min():
+def send_30min_timer():
     """Lance le timer de 30min en arrière-plan"""
-    threading.Thread(target=_timer_petit_dej, daemon=False).start()
+    threading.Thread(target=breakfast_timer, daemon=False).start()
 
 
-def _timer_petit_dej():
+def breakfast_timer():
     """Timer interne de 30min puis notification"""
     time.sleep(30 * 60)  # 30 minutes
-    envoyer_notifiaction_petit_dej()
+    send_breakfast_notification()
