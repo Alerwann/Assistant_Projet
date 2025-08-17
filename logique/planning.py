@@ -1,7 +1,6 @@
 import csv
 import datetime as dt
 import locale
-from datetime import datetime, timedelta
 import subprocess
 
 from config import CONVERSATION_NAME, CSV_PATH
