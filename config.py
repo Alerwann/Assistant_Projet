@@ -3,24 +3,27 @@ Configuration de l'Assistant Personnel
 
 Contient tous les chemins et paramètres configurables de l'application.
 """
-# ===Application===
+# ===PATH APP TIERCE===
 GEFORCENOW_PATH= "/Applications/GeForceNOW.app"
 VSCODE_PATH = "/Applications/Visual Studio Code.app"
 GOOGLE_PROFIL_PATH ="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
-BANQUE_PATH = "https://www.caisse-epargne.fr/bourgogne-franche-comte/"
-NOTION_PATH = "https://www.caisse-epargne.fr/bourgogne-franche-comte/"
 
-# ===Whatsapp===
+# ===SITES WEB===
+PROFIL_GOOGLE = "--profile-directory=Profile 1"
+BANQUE_PATH = "https://www.caisse-epargne.fr/bourgogne-franche-comte/"
+NOTION_PATH = "https://www.notion.so/D-penses-c83096354dfa422ba0d229a03693d676"
+
+# ===WHATSAPP===
 CONVERSATION_NAME = 'Message du jour'
 
-# ===fichier===
+# ===FICHIER===
 CSV_PATH = "/Users/alerwann/Desktop/menu.csv"
 ICON_PATH = "assets/icon_32.png"
 
-# ===TIMER===
+# ===TIMER==
 BREAKFAST_TIMER_MINUTES = 30
 
-# ===Info de l'application===
+# ===INFORMATION SUR L'APPLICATION===
 APP_NAME = "Assistant Personnel"
 APP_VERSION = "1.0.0"
-AUTHOR = "Ton Nom"
+AUTHOR = "Alerwann"

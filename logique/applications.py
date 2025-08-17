@@ -1,5 +1,5 @@
 import subprocess
-from config import GEFORCENOW_PATH, VSCODE_PATH, GOOGLE_PROFIL_PATH,BANQUE_PATH,NOTION_PATH
+from config import GEFORCENOW_PATH, VSCODE_PATH, GOOGLE_PROFIL_PATH,BANQUE_PATH,NOTION_PATH,PROFIL_GOOGLE
 
 def choice_3():
     """
@@ -30,7 +30,7 @@ def choice_1():
     subprocess.Popen(
         [
             GOOGLE_PROFIL_PATH,
-            "--profile-directory=Profile 1",
+            PROFIL_GOOGLE,
             NOTION_PATH,
             BANQUE_PATH,
         ],

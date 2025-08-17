@@ -37,4 +37,5 @@ def assistant_cli():
     print(treatment_choice_app(app_choice))
 
 
-assistant_cli()
+if __name__ == "__main__":
+    assistant_cli()
