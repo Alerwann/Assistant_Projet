@@ -5,6 +5,17 @@ import subprocess
 
 
 def send_breakfast_notification():
+    """
+    Envoie de notification quand timer fini après un délais de 5s
+    Utilise terminal-notifier pour afficher une notification système
+    indiquant que le temps de petit-déjeuner est arrivé.
+
+    Note: 
+        Utilise terminal-notifier
+
+    Raises:
+        FileNotFoundError: Si terminal-notifier n'est pas installé
+    """
     time.sleep(5)
     subprocess.run(
         [
@@ -12,9 +23,9 @@ def send_breakfast_notification():
             "-title",
             "Assistant",
             "-message",
-            "Tu peux prendre ton petit déjener",
+            "Tu peux prendre ton petit déjeuner",
             "-subtitle",
-            "Bonne appétit 🤤",
+            "Bon appétit 🤤",
             "-sound",
             "default",
         ]
