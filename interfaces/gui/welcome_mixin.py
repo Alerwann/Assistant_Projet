@@ -1,9 +1,9 @@
 from tkinter import Button
-from logique.sommeil import treat_resp_sleep
+from logique.sleep import treat_resp_sleep
 
 
-class AccueilMixin:
-    def ecran_accueil(self):
+class WelcomMixin:
+    def welcom_screen(self):
 
         self.show_message(
             "👋 Salut Mon Maître"

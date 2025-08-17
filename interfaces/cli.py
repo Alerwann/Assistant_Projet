@@ -3,7 +3,7 @@ import sys
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
-from logique.sommeil import treat_resp_sleep
+from logique.sleep import treat_resp_sleep
 from logique.notification import send_30min_timer
 from logique.planning import must_send_message_cli
 from logique.applications import treatement_choice_app

@@ -3,7 +3,7 @@ import sys
 import os
 from tkinter import PhotoImage
 
-from .accueil_mixin import AccueilMixin
+from .welcome_mixin import WelcomMixin
 
 from .menu_mixin import MenuMixin
 from .whatsapp_mixin import WhatsAppMixin
@@ -11,7 +11,7 @@ from .whatsapp_mixin import WhatsAppMixin
 
 class AssistantGUI(
     WhatsAppMixin,
-    AccueilMixin,
+    WelcomMixin,
     MenuMixin,
 ):
     def __init__(self):
@@ -50,7 +50,7 @@ class AssistantGUI(
             print(f"Impossible de donwload l'icône : {e}")
 
         # Démarrer
-        self.ecran_accueil()  # Méthode héritée d'AccueilMixin
+        self.welcom_screen()  # Méthode héritée d'AccueilMixin
         self.fenetre.mainloop()
 
     def show_message(self, message):
