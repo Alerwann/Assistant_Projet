@@ -10,9 +10,7 @@ class MenuMixin:
         lancer_timer_30min()
 
         # Boutons d'action
-        btn1 = Button(
-            self.frame_boutons, text="📊 Comptes", command=self.action_comptes # pyright: ignore[reportAttributeAccessIssue]
-        )
+        btn1 = Button(self.frame_boutons, text="📊 Comptes", command=self.action_comptes)       # pyright: ignore[reportAttributeAccessIssue]
         btn2 = Button(self.frame_boutons, text="🎮 Jeu", command=self.action_jeu) # pyright: ignore[reportAttributeAccessIssue]
         btn3 = Button(self.frame_boutons, text="💻 Code", command=self.action_code) # pyright: ignore[reportAttributeAccessIssue]
 

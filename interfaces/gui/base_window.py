@@ -9,8 +9,9 @@ from .menu_mixin import MenuMixin
 from .whatsapp_mixin import WhatsAppMixin  
 
 
-
-class AssistantGUI(AccueilMixin, MenuMixin, WhatsAppMixin):  
+class AssistantGUI(
+    WhatsAppMixin,AccueilMixin,MenuMixin,
+):
     def __init__(self):
         self.fenetre = Tk()
         self.fenetre.title("🤖 Assistant Personnel")
@@ -29,9 +30,7 @@ class AssistantGUI(AccueilMixin, MenuMixin, WhatsAppMixin):
         self.frame_quit_button.pack(pady=10)
 
         # Bouton Quitter permanent
-        btn_quitter = Button(
-            self.frame_quit_button, text="❌ Quitter", command=self.quitter_complet
-        )
+        btn_quitter = Button(self.frame_quit_button, text="❌ Quitter", command=self.quitter_complet )
         btn_quitter.pack(side="left", padx=10)
 
         # Changement icon

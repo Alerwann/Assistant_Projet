@@ -2,12 +2,9 @@ from tkinter import Button
 from logique.sommeil import traiter_reponse_sommeil
 
 
-
 class AccueilMixin:
     def ecran_accueil(self):
-        # Debug pour voir si self est bien initialisé
-        print(f"DEBUG: type(self) = {type(self)}")
-        print(f"DEBUG: hasattr frame_boutons = {hasattr(self, 'frame_boutons')}")
+      
 
         self.afficher_message("👋 Salut Mon Maître") # pyright: ignore[reportAttributeAccessIssue]
         self.afficher_message("👀 Comment tu vas?") # pyright: ignore[reportAttributeAccessIssue]
@@ -39,4 +36,4 @@ class AccueilMixin:
             widget.destroy()
 
         # Créer un stub temporaire
-        self.afficher_message("Menu principal à venir...") # pyright: ignore[reportAttributeAccessIssue]
+        self.envoie_message() # pyright: ignore[reportAttributeAccessIssue]

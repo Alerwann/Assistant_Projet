@@ -55,18 +55,28 @@ def choix_horaire(response_heure):
 
 def envoyer_whatsapp():
     message =generer_message_du_jour()
-   
-    nom_du_contact= "autre"
+
+    nom_du_contact= "Message du jour"
 
     script_applescript = f"""
-     -- Fermer WhatsApp complètement
-    do shell script "pkill -f WhatsApp"
-    delay 5
+
+    -- Vérifier si WhatsApp tourne
+    if application "WhatsApp" is running then
+        tell application "WhatsApp" to quit
+        delay 2
+    
+    -- Force kill seulement si encore vivant
+        try
+            do shell script "pgrep -f WhatsApp"
+            do shell script "pkill -f WhatsApp"
+        end try
+        delay 2
+    end if
     
     -- Relancer WhatsApp (état propre)
     tell application "WhatsApp"
         activate
-        delay 10  -- Plus de temps pour le lancement
+        delay 15  -- Plus de temps pour le lancement
     end tell
     
    
@@ -74,7 +84,7 @@ def envoyer_whatsapp():
         tell process "WhatsApp"
             -- Raccourci clavier pour chercher (Cmd+F)
             key code 3 using command down
-            delay 1
+            delay 5
 
                        
             -- Taper le nom du contact
@@ -87,7 +97,7 @@ def envoyer_whatsapp():
             key code 125  -- Flèche bas encore
             delay 0.3
             
-           -- 2 fois tabulation
+           -- appuyer sur entré
            key code 36
            delay 0.3
                                   
@@ -97,7 +107,7 @@ def envoyer_whatsapp():
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
-           keystroke "On est {message[0]} "
+           keystroke "On est {message[0]}. "
            delay 0.3
            keystroke ":coeur"
            delay 1
@@ -105,23 +115,23 @@ def envoyer_whatsapp():
            delay 0.3
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
-           keystroke "A midi on mange {message[1]}"
+           keystroke "A midi on mange : {message[1]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée 
            delay 0.3
-           keystroke "Ce soir on mange {message[2]}"
+           keystroke "Ce soir on mange : {message[2]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
-           keystroke "Les événements importants : {message[3]}"
+           keystroke "Les événements importants : {message[3]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
-           keystroke "Ce soir tu mets la crème {message[4]}"
+           keystroke "Ce soir tu mets la crème : {message[4]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
-           keystroke "Et surtout tu n'oublies pas {message[5]} "
+           keystroke "Et surtout tu n'oublies pas: {message[5]}. "
            keystroke ":bisou"
            delay 1
            key code 36 --entrée
@@ -159,5 +169,3 @@ def test():
 
     delais= abs(actuelle_heure-choix_heure)
     print(delais)
-
-envoyer_whatsapp()

@@ -47,7 +47,7 @@ class WhatsAppMixin:
         self.minute_combo = ttk.Combobox(
         self.frame_horaire,
         width=3,
-        values=[f"{m:02d}" for m in range(0, 60, 15)],  # 00, 15, 30, 45
+        values=[f"{m:02d}" for m in range(0, 60, 5)],  # 00, 15, 30, 45
         # Ou pour toutes les 5 min : range(0, 60, 5)
         state="readonly"
         )
@@ -58,10 +58,10 @@ class WhatsAppMixin:
         btn_envoyer = Button(self.frame_boutons, text="✉️ Envoyer", command=self.executer_envoi) # pyright: ignore[reportAttributeAccessIssue]
         btn_envoyer.pack(pady=10)
 
-        btn_quitter = Button(
-            self.frame_quit_button, text="❌ Quitter", command=self.quitter_complet # pyright: ignore[reportAttributeAccessIssue]
-        )
-        btn_quitter.pack(side="left", padx=10)
+        # btn_quitter = Button(
+        #     self.frame_quit_button, text="❌ Quitter", command=self.quitter_complet # pyright: ignore[reportAttributeAccessIssue]
+        # )
+        # btn_quitter.pack(side="left", padx=10)
 
     def toggle_horaire(self):
 
@@ -87,21 +87,20 @@ class WhatsAppMixin:
             self.fenetre.update() # pyright: ignore[reportAttributeAccessIssue]
 
             try:
-                from logique.planning import envoyer_whatsapp
+                
                 envoyer_whatsapp()
                 self.afficher_message("✅ Message envoyé avec succès !") # pyright: ignore[reportAttributeAccessIssue]
             except Exception as e:
                 self.afficher_message(f"❌ Erreur : {e}") # pyright: ignore[reportAttributeAccessIssue]
 
                 # Retour menu après 2 secondes
-                self.fenetre.after(2000, self.retour_menu) # pyright: ignore[reportAttributeAccessIssue]
+            self.fenetre.after(2000, self.retour_menu) # pyright: ignore[reportAttributeAccessIssue]
+        else:
+            heure = int(self.heure_combo.get())
+            minute = int(self.minute_combo.get())
 
-            else:
-                heure = int(self.heure_combo.get())
-                minute = int(self.minute_combo.get())
-
-                self.afficher_message(f"⏰ Message programmé pour {heure:02d}h{minute:02d}") # pyright: ignore[reportAttributeAccessIssue]
-                self.programmer_envoi(heure, minute)
+            self.afficher_message(f"⏰ Message programmé pour {heure:02d}h{minute:02d}") # pyright: ignore[reportAttributeAccessIssue]
+            self.programmer_envoi(heure, minute)
 
             self.afficher_message("✅ Message programmé envoyé !") # pyright: ignore[reportAttributeAccessIssue]
             self.fenetre.after(2000, self.retour_menu)  # pyright: ignore[reportAttributeAccessIssue]
@@ -150,3 +149,19 @@ class WhatsAppMixin:
 
         # Recréer le menu principal
         self.menu_principal()  # type: ignore
+
+    def envoie_message(self):
+        self.afficher_message('Veux-tu envoyer le message du jour?') # pyright: ignore[reportAttributeAccessIssue]
+
+        btn_oui = Button(
+            self.frame_boutons, # pyright: ignore[reportAttributeAccessIssue]
+            text="😊 Oui",
+            command=lambda: self.envoie()
+        )
+        btn_non = Button(
+            self.frame_boutons, # pyright: ignore[reportAttributeAccessIssue]
+            text="😟 non",
+            command=lambda: self.non_envoi()
+        )
+        btn_oui.pack(side="left", padx=10)
+        btn_non.pack(side="left", padx=10)
