@@ -4,6 +4,16 @@ from logique.sleep import treat_resp_sleep
 
 class WelcomMixin:
     def welcom_screen(self):
+        """
+        L'assistant demande pour accueillir si la personne à bien dormi
+
+        UI Elements : 
+            - yes_btn -> répond "oui" 
+            - no_btn -> répond "non" 
+
+        Actions:
+            Relie la réponse à une phrase sympathique
+        """
 
         self.show_message(
             "👋 Salut Mon Maître"
@@ -31,6 +41,15 @@ class WelcomMixin:
         no_btn.pack(side="left", padx=10)
 
     def rep_sleep(self, reponse):
+        """
+        Affiche le message en fonction de la réponse de sur le sommeil l'utilisateur
+
+        Actions:
+            - Recueil la réponse et traite
+            - Nettoie les boutons
+            - Relie à la méthode send_message
+            
+        """
         # Import uniquement ici pour éviter les imports circulaires
 
         message = treat_resp_sleep(reponse)

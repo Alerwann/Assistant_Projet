@@ -15,6 +15,7 @@ class AssistantGUI(
     MenuMixin,
 ):
     def __init__(self):
+        """Création de l'ensemble des variables de l'application ainsi que les éléments d'ui"""
         self.fenetre = Tk()
         self.fenetre.title("🤖 Assistant Personnel")
         self.fenetre.geometry("600x500")

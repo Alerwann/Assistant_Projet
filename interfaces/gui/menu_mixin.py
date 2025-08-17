@@ -5,6 +5,20 @@ from logique.applications import *
 
 class MenuMixin:
     def menu_principal(self):
+        """
+        Mise en place de l'interface pour le choix d'activité
+
+        UI Elements:
+            - btn1 -> relier à l'action compte
+            - btn2 -> relier à l'action jeu
+            - btn3 -> relier au choix code
+        Action:
+            - Propose le choix pour l'action à faire
+            - Démarre le tiemer pour le petit déjeuner
+            - Relie les choix aux méthodes adéquates
+
+        Note : le timer tourne en arrière plan
+        """
         self.show_message(
             "\nPassons aux choses sérieuses, que veux-tu faire?\n"
         )  # pyright: ignore[reportAttributeAccessIssue]
@@ -28,18 +42,21 @@ class MenuMixin:
         btn3.pack(side="left", padx=10)
 
     def acccount_action(self):
+        """Lance la logique choice_1 après avoir valider par l'affichage d'un message """
         self.show_message(
             "📊 Ouverture de tes comptes..."
         )  # pyright: ignore[reportAttributeAccessIssue]
         choice_1()
 
     def game_action(self):
+        """Lance la logique choice_2 après avoir valider par l'affichage d'un message """
         self.show_message(
             "🎮 Tu as raison, commençons en douceur!"
         )  # pyright: ignore[reportAttributeAccessIssue]
         choice_2()
 
     def code_action(self):
+        """Lance la logique choice_3 après avoir valider par l'affichage d'un message """
         self.show_message(
             "💻 Tu es d'humeur à te concentrer!"
         )  # pyright: ignore[reportAttributeAccessIssue]
