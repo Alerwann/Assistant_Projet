@@ -10,6 +10,12 @@ from logique.applications import treatment_choice_app
 
 
 def assistant_cli():
+    """
+    Programme complet de l'assistant sans interface visuel
+    
+        Note: 
+        Prends fin quand le timer du petit déjeuner est fini et que l'utilisateur ai choisi une activité
+    """
     print("Salut je suis ton assistant préféré")
     sleep_choice = input("Tu as bien dormi? y/n \n")
     sleep_result = treat_resp_sleep(sleep_choice)

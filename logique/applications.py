@@ -1,4 +1,5 @@
 import subprocess
+from config import GEFORCENOW_PATH, VSCODE_PATH, GOOGLE_PROFIL_PATH,BANQUE_PATH,NOTION_PATH
 
 def choice_3():
     """
@@ -7,7 +8,7 @@ def choice_3():
     Raises:
         FileNotFoundError: Si Visual Studio Code n'est pas installé au chemin spécifié
     """
-    subprocess.run(["open", "/Applications/Visual Studio Code.app"])
+    subprocess.run(["open", VSCODE_PATH])
 
 
 def choice_2():
@@ -16,7 +17,7 @@ def choice_2():
     Raises:
         FileNotFoundError: Si GeForce Now n'est pas installé au chemin spécifié
     """
-    subprocess.run(["open", "/Applications/GeForceNOW.app"])
+    subprocess.run(["open", GEFORCENOW_PATH])
 
 
 def choice_1():
@@ -28,10 +29,10 @@ def choice_1():
     """
     subprocess.Popen(
         [
-            "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+            GOOGLE_PROFIL_PATH,
             "--profile-directory=Profile 1",
-            "https://www.notion.so/D-penses-c83096354dfa422ba0d229a03693d676",
-            "https://www.caisse-epargne.fr/bourgogne-franche-comte/",
+            NOTION_PATH,
+            BANQUE_PATH,
         ],
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,

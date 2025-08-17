@@ -8,6 +8,7 @@ from logique.planning import send_whatsapp
 
 class WhatsAppMixin:
     def send(self):
+        """Création de la fenêtre pour l'envoie du message whatsapp"""
         for widget in self.frame_button.winfo_children():
             widget.destroy()
 
@@ -65,7 +66,7 @@ class WhatsAppMixin:
         btn_send.pack(pady=10)
 
     def toggle_horaire(self):
-
+        """configure les état possible des cases heure et minute"""
         if self.send_now.get():
             self.hour_combo.config(state="disabled")
             self.minute_combo.config(state="disabled")
@@ -74,7 +75,15 @@ class WhatsAppMixin:
             self.minute_combo.config(state="readonly")
 
     def send_exec(self):
+        """
+        Envoie du message selon le choix horaire
 
+        Return:
+            si immédiat envoie le message et affiche de patienter
+            si différé programmation d'un timer suivant saisie
+
+        Raises:
+        """
         if self.send_now.get():
             # IMMÉDIATEMENT afficher le message d'attente
             self.show_message(
@@ -125,6 +134,7 @@ class WhatsAppMixin:
             )  # pyright: ignore[reportAttributeAccessIssue]
 
     def send_programmation(self, heure, minute):
+        """Mise en place du timer"""
         # Timer en thread séparé
         threading.Thread(
             target=self._differ_send, args=(heure, minute), daemon=True

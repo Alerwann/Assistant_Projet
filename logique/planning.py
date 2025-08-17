@@ -4,6 +4,7 @@ import locale
 from datetime import datetime, timedelta
 import subprocess
 
+from config import CONVERSATION_NAME, CSV_PATH
 
 # Configurer en français
 locale.setlocale(locale.LC_TIME, "fr_FR.UTF-8")
@@ -23,7 +24,7 @@ def download_planning_csv():
     """
     planning = []
     with open(
-        "/Users/alerwann/Desktop/menu.csv", newline="", encoding="utf-8"
+        CSV_PATH, newline="", encoding="utf-8"
     ) as csvfile:
         reader = csv.DictReader(csvfile, delimiter=";")
         for row in reader:
@@ -108,7 +109,7 @@ def send_whatsapp():
     """
     message = create_daily_message()
 
-    nom_du_contact = "marie guehl"
+    
 
     script_applescript = f"""
 
@@ -140,7 +141,7 @@ def send_whatsapp():
 
                        
             -- Taper le nom du contact
-            keystroke "{nom_du_contact}"
+            keystroke "{CONVERSATION_NAME}"
             delay 3
 
             -- 2 fois flèche bas

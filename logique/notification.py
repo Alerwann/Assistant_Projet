@@ -2,7 +2,7 @@ import time
 import threading
 
 import subprocess
-
+from config import BREAKFAST_TIMER_MINUTES
 
 def send_breakfast_notification():
     """
@@ -39,5 +39,5 @@ def send_30min_timer():
 
 def breakfast_timer():
     """Timer interne de 30min puis notification"""
-    time.sleep(30 * 60)  # 30 minutes
+    time.sleep(BREAKFAST_TIMER_MINUTES * 60)  # 30 minutes
     send_breakfast_notification()
