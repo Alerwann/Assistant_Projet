@@ -9,8 +9,7 @@ from .menu_mixin import MenuMixin
 from .whatsapp_mixin import WhatsAppMixin  
 
 
-class AssistantGUI(
-    WhatsAppMixin,AccueilMixin,MenuMixin,
+class AssistantGUI(    WhatsAppMixin,AccueilMixin,MenuMixin,
 ):
     def __init__(self):
         self.fenetre = Tk()

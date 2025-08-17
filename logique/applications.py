@@ -23,3 +23,16 @@ def choix_1():
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
     )
+
+
+def traitement_choix_app (choix_app):
+    if choix_app =='1':
+        choix_1()
+        return "J'espère que cela ne sera pas douloureux 😅"
+    elif choix_app=='2':
+        choix_2()
+        return "un peu de détente ça fait plaisir 🕹️"
+    elif choix_app=='3':
+        choix_3()
+        return "Rappelle toi que tu es doué"
+    else :return "On peut ne rien faire aussi en effet 🤣"

@@ -42,8 +42,10 @@ def generer_message_du_jour():
 
 def doit_envoyer_message(response_envoie):
     if response_envoie=='y':
+        
         return 'Maintenant ou plus tard? ⏰'
     else :
+        
         return "D'accord on va s'en passer 😒"
 
 
@@ -56,7 +58,7 @@ def choix_horaire(response_heure):
 def envoyer_whatsapp():
     message =generer_message_du_jour()
 
-    nom_du_contact= "Message du jour"
+    nom_du_contact= "marie guehl"
 
     script_applescript = f"""
 
@@ -163,9 +165,17 @@ def envoyer_whatsapp():
         return False
 
 
-def test():
-    actuelle_heure = timedelta(hours=datetime.now().time().hour, minutes=datetime.now().time().minute)
-    choix_heure = timedelta(hours=12,minutes=40)
 
-    delais= abs(actuelle_heure-choix_heure)
-    print(delais)
+
+
+def doit_envoyer_message_cli(reponse):
+
+    if reponse=='y':
+        envoyer_whatsapp()
+        return "C'est envoyé"
+
+    elif reponse=='n':
+        return "On va faire sans 😒"
+
+    else:
+        return "J'ai compris tu veux pas répondre à mes choix🤣"
