@@ -34,13 +34,13 @@ def send_breakfast_notification():
 
 def send_timer(duration, type):
     """Lance le timer en arrière-plan"""
-    print('je suis dans dans send timer')
+ 
     threading.Thread(target=lambda: general_timer(duration = duration,type=type), daemon=False).start()
 
 
 def general_timer(duration,type):
     """Timer interne avant notification notification"""
-    print('je suis dans général timer')
+    print(duration)
     time.sleep(int(duration))  
     if type == 'breakfast':
         send_breakfast_notification()

@@ -18,6 +18,7 @@ class WelcomMixin:
         """
         # Lancer le timer
         send_timer(BREAKFAST_TIMER_SECOND, "breakfast")
+        self.create_progressBar('petit déjeuner', BREAKFAST_TIMER_SECOND)
 
         self.show_message(
             "👋 Salut Mon Maître  \n"
