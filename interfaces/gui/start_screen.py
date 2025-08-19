@@ -35,7 +35,8 @@ class AssistantGUI(
         self.zone_progressbars = Frame(self.fenetre)
         self.zone_progressbars.pack(pady=10)
 
-     
+        #dictionnaire de stocka d'états
+        self.progressbars_frame={}
       
 
         # Zone de bouton quitter
