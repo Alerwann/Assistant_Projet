@@ -1,5 +1,5 @@
 import subprocess
-from config import GEFORCENOW_PATH, VSCODE_PATH, GOOGLE_PROFIL_PATH,BANQUE_PATH,NOTION_PATH,PROFIL_GOOGLE
+from config import GEFORCENOW_PATH, VSCODE_PATH, GOOGLE_PROFIL_PATH,BANQUE_PATH,NOTION_PATH,PROFIL_GOOGLE_BG, PROFIL_GOOGLE_AL, CLAUDE_PATH, SPOTIFY_PATH
 
 def choice_3():
     """
@@ -8,7 +8,12 @@ def choice_3():
     Raises:
         FileNotFoundError: Si Visual Studio Code n'est pas installé au chemin spécifié
     """
-    subprocess.run(["open", VSCODE_PATH])
+    subprocess.run(["open", VSCODE_PATH,SPOTIFY_PATH])
+    subprocess.Popen(
+        [GOOGLE_PROFIL_PATH, PROFIL_GOOGLE_AL, CLAUDE_PATH],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
 
 
 def choice_2():
@@ -30,7 +35,7 @@ def choice_1():
     subprocess.Popen(
         [
             GOOGLE_PROFIL_PATH,
-            PROFIL_GOOGLE,
+            PROFIL_GOOGLE_BG,
             NOTION_PATH,
             BANQUE_PATH,
         ],
@@ -55,12 +60,12 @@ def treatment_choice_app(choice_app):
     """
     if choice_app == "1":
         choice_1()
-        return "J'espère que cela ne sera pas douloureux 😅"
+        return "J'espère que cela ne sera pas douloureux 😅 \n"
     elif choice_app == "2":
         choice_2()
-        return "un peu de détente ça fait plaisir 🕹️"
+        return "un peu de détente ça fait plaisir 🕹️ \n"
     elif choice_app == "3":
         choice_3()
         return "Rappelle toi que tu es doué"
     else:
-        return "On peut ne rien faire aussi en effet 🤣"
+        return "On peut ne rien faire aussi en effet 🤣 \n"

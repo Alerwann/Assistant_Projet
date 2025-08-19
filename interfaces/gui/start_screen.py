@@ -2,6 +2,7 @@ from tkinter import Tk, Label, Button, Text, Frame
 import sys
 import os
 from tkinter import PhotoImage
+import time
 
 from .welcome_mixin import WelcomMixin
 
@@ -59,8 +60,10 @@ class AssistantGUI(
         self.messages.see("end")
 
     def quitter_complet(self):
-        """Arrête tout, y compris le timer"""
+        """Arrête tout, y compris le timer
+        note: a ameliorer avec double validation"""
         self.show_message("Tu quittes la page et le timer va être annulé")
+        
         import os
 
         os._exit(0)

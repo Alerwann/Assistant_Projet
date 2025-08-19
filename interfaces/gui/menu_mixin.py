@@ -1,5 +1,5 @@
 from tkinter import Button
-from logique.notification import send_30min_timer
+
 from logique.applications import *
 
 
@@ -20,11 +20,8 @@ class MenuMixin:
         Note : le timer tourne en arrière plan
         """
         self.show_message(
-            "\nPassons aux choses sérieuses, que veux-tu faire?\n"
+            "Passons aux choses sérieuses, que veux-tu faire?\n"
         )  # pyright: ignore[reportAttributeAccessIssue]
-
-        # Lancer le timer
-        send_30min_timer()
 
         # Boutons d'action
         btn1 = Button(
@@ -44,20 +41,20 @@ class MenuMixin:
     def acccount_action(self):
         """Lance la logique choice_1 après avoir valider par l'affichage d'un message """
         self.show_message(
-            "📊 Ouverture de tes comptes..."
+            "📊 Ouverture de tes comptes... \n"
         )  # pyright: ignore[reportAttributeAccessIssue]
         choice_1()
 
     def game_action(self):
         """Lance la logique choice_2 après avoir valider par l'affichage d'un message """
         self.show_message(
-            "🎮 Tu as raison, commençons en douceur!"
+            "🎮 Tu as raison, commençons en douceur! \n"
         )  # pyright: ignore[reportAttributeAccessIssue]
         choice_2()
 
     def code_action(self):
         """Lance la logique choice_3 après avoir valider par l'affichage d'un message """
         self.show_message(
-            "💻 Tu es d'humeur à te concentrer!"
+            "💻 Tu es d'humeur à te concentrer! \n"
         )  # pyright: ignore[reportAttributeAccessIssue]
         choice_3()

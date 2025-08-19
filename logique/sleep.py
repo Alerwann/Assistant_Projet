@@ -14,8 +14,12 @@ def treat_resp_sleep(resp_sleep):
     """
 
     if resp_sleep == "y":
-        return "🥳 ça va être une excellente journée"
+        return "🥳 ça va être une excellente journée \n"
     elif resp_sleep == "n":
-        return "🥲 On va tout faire pour que ta journée soit bonne"
+        return "🥲 On va tout faire pour que ta journée soit bonne \n"
     else:
-        return "😡Tu cherches à me contredire 🤣"
+        return "😡Tu cherches à me contredire 🤣 \n"
+
+    
+
+

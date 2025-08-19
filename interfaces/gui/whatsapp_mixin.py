@@ -4,6 +4,7 @@ from datetime import timedelta, datetime
 import time
 
 from logique.planning import send_whatsapp
+from logique.notification import send_timer
 
 
 class WhatsAppMixin:
@@ -31,7 +32,7 @@ class WhatsAppMixin:
 
         self.show_message("Très bien")
         self.show_message(
-            "Quand veux tu l'envoyer?"
+            "Quand veux tu l'envoyer? \n"
         )  # pyright: ignore[reportAttributeAccessIssue]
 
         self.send_now = IntVar()
@@ -111,7 +112,7 @@ class WhatsAppMixin:
         if self.send_now.get():
             # IMMÉDIATEMENT afficher le message d'attente
             self.show_message(
-                "⏳ Envoi en cours, veuillez patienter..."
+                "⏳ Envoi en cours, veuillez patienter... \n"
             )  # pyright: ignore[reportAttributeAccessIssue]
 
             # Désactiver le bouton pour éviter les clics multiples
@@ -130,7 +131,7 @@ class WhatsAppMixin:
 
                 send_whatsapp()
                 self.show_message(
-                    "✅ Message envoyé avec succès !"
+                    "✅ Message envoyé avec succès ! \n"
                 )  # pyright: ignore[reportAttributeAccessIssue]
             except Exception as e:
                 self.show_message(
@@ -146,12 +147,12 @@ class WhatsAppMixin:
             minute = int(self.minute_combo.get())
 
             self.show_message(
-                f"⏰ Message programmé pour {heure:02d}h{minute:02d}"
+                f"⏰ Message programmé pour {heure:02d}h{minute:02d} \n"
             )  # pyright: ignore[reportAttributeAccessIssue]
             self.send_programmation(heure, minute)
 
             self.show_message(
-                "✅ Message programmé envoyé !"
+                "✅ Message programmé pour l'envoi ! \n"
             )  # pyright: ignore[reportAttributeAccessIssue]
             self.fenetre.after(
                 2000, self.back_menu
@@ -187,18 +188,17 @@ class WhatsAppMixin:
         # Calculer l'heure cible aujourd'hui
         now = datetime.now()
         hour_target = now.replace(hour=heure, minute=minute, second=0, microsecond=0)
-        print(hour_target)
 
         # Si l'heure est déjà passée, programmer pour demain
         if hour_target <= now:
             hour_target += timedelta(days=1)
             self.show_message(
-                f"⏰ Heure passée, programmé pour demain {heure:02d}h{minute:02d}"
+                f"⏰ Heure passée, programmé pour demain {heure:02d}h{minute:02d} \n"
             )  # pyright: ignore[reportAttributeAccessIssue]
 
         # Calculer le délai en secondes
         delay = (hour_target - now).total_seconds()
-
+        send_timer(delay-30,'whatsapp')
         # Attendre le délai
         time.sleep(delay)
 
@@ -230,7 +230,7 @@ class WhatsAppMixin:
             - Relie les choix aux méthodes correspondantes
         """
         self.show_message(
-            "Veux-tu envoyer le message du jour?"
+            "Veux-tu envoyer le message du jour? \n"
         )  # pyright: ignore[reportAttributeAccessIssue]
 
         yes_btn = Button(
@@ -258,7 +258,7 @@ class WhatsAppMixin:
             "D'accord on va s'en passer 😒"
         )  # pyright: ignore[reportAttributeAccessIssue]
         self.fenetre.after(
-            2000, self.back_menu
+            100, self.back_menu
         )  # pyright: ignore[reportAttributeAccessIssue]
 
     def back_menu(self):
@@ -267,7 +267,6 @@ class WhatsAppMixin:
 
         Action :
             - Réinitialise les boutons
-            - Indique le retour au menu principal
             - Relie à la méthode menu
         """
         # Nettoyer tous les boutons actuels
@@ -277,11 +276,6 @@ class WhatsAppMixin:
             self.frame_button.winfo_children()
         ):  # pyright: ignore[reportAttributeAccessIssue]
             widget.destroy()
-
-        # Afficher message de transition
-        self.show_message(
-            "\n🔄 Retour au menu principal...\n"
-        )  # pyright: ignore[reportAttributeAccessIssue]
 
         # Recréer le menu principal
         self.menu_principal()  # type: ignore>

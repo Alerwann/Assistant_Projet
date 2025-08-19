@@ -2,7 +2,7 @@ import time
 import threading
 
 import subprocess
-from config import BREAKFAST_TIMER_MINUTES
+
 
 def send_breakfast_notification():
     """
@@ -10,13 +10,13 @@ def send_breakfast_notification():
     Utilise terminal-notifier pour afficher une notification système
     indiquant que le temps de petit-déjeuner est arrivé.
 
-    Note: 
+    Note:
         Utilise terminal-notifier
 
     Raises:
         FileNotFoundError: Si terminal-notifier n'est pas installé
     """
-    time.sleep(5)
+    # time.sleep(5)
     subprocess.run(
         [
             "terminal-notifier",
@@ -32,12 +32,62 @@ def send_breakfast_notification():
     )
 
 
-def send_30min_timer():
-    """Lance le timer de 30min en arrière-plan"""
-    threading.Thread(target=breakfast_timer, daemon=False).start()
+def send_timer(duration, type):
+    """Lance le timer en arrière-plan"""
+    print('je suis dans dans send timer')
+    threading.Thread(target=lambda: general_timer(duration = duration,type=type), daemon=False).start()
 
 
-def breakfast_timer():
-    """Timer interne de 30min puis notification"""
-    time.sleep(BREAKFAST_TIMER_MINUTES * 60)  # 30 minutes
-    send_breakfast_notification()
+def general_timer(duration,type):
+    """Timer interne avant notification notification"""
+    print('je suis dans général timer')
+    time.sleep(int(duration))  
+    if type == 'breakfast':
+        send_breakfast_notification()
+    elif type == 'whatsapp':
+        send_whatsappenvoie_notification()
+    else: return error_timer()
+
+
+def send_whatsappenvoie_notification():
+    """
+    Envoie de notification quand timer fini après un délais de 5s
+    Utilise terminal-notifier pour afficher une notification système
+    indiquant que le temps de petit-déjeuner est arrivé.
+
+    Note:
+        Utilise terminal-notifier
+
+    Raises:
+        FileNotFoundError: Si terminal-notifier n'est pas installé
+    """
+    # time.sleep(5)
+    subprocess.run(
+        [
+            "terminal-notifier",
+            "-title",
+            "Assistant",
+            "-message",
+            "Attention je vais ouvrir Whatsapp dans quelque secondes",
+            "-subtitle",
+            "NE TOUCHE À RIEN",
+            "-sound",
+            "default",
+        ]
+    )
+
+def error_timer():
+    time.sleep(5)
+    subprocess.run(
+        [
+            "terminal-notifier",
+            "-title",
+            "Assistant",
+            "-message",
+            "Error mon grand",
+            "-subtitle",
+            "timer de 5s, tu as mal définit la commande",
+            "-sound",
+            "default",
+        ]
+    )

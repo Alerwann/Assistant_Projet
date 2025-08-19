@@ -108,22 +108,16 @@ def send_whatsapp():
     """
     message = create_daily_message()
 
-    
-
     script_applescript = f"""
 
-    -- Vérifier si WhatsApp tourne
-    if application "WhatsApp" is running then
-        tell application "WhatsApp" to quit
-        delay 2
-    
+   
     -- Force kill seulement si encore vivant
         try
             do shell script "pgrep -f WhatsApp"
             do shell script "pkill -f WhatsApp"
         end try
         delay 2
-    end if
+  
     
     -- Relancer WhatsApp (état propre)
     tell application "WhatsApp"
@@ -145,13 +139,13 @@ def send_whatsapp():
 
             -- 2 fois flèche bas
             key code 125  -- Flèche bas
-            delay 0.3
+            delay 1
             key code 125  -- Flèche bas encore
-            delay 0.3
+            delay 1
             
            -- appuyer sur entré
            key code 36
-           delay 0.3
+           delay 1
                                   
             -- Taper le message ligne par ligne
             
@@ -179,12 +173,14 @@ def send_whatsapp():
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
-           keystroke "Ce night tu mets la crème : {message[4]}."
+           keystroke "Ce soir tu mets la crème : {message[4]}."
            delay 1
            key code 36 using shift down  -- Shift+Entrée
            delay 0.3
+           key code 36 using shift down  -- Shift+Entrée
+           delay 0.3
            keystroke "Et surtout tu n'oublies pas: {message[5]}. "
-           keystroke ":bisou"
+           keystroke ":amour"
            delay 1
            key code 36 --entrée
            delay 0.3

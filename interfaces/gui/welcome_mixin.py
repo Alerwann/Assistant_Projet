@@ -1,6 +1,8 @@
 from tkinter import Button
 from logique.sleep import treat_resp_sleep
+from logique.notification import send_timer
 
+from config import BREAKFAST_TIMER_SECOND
 
 class WelcomMixin:
     def welcom_screen(self):
@@ -14,12 +16,14 @@ class WelcomMixin:
         Actions:
             Relie la réponse à une phrase sympathique
         """
+        # Lancer le timer
+        send_timer(BREAKFAST_TIMER_SECOND, "breakfast")
 
         self.show_message(
-            "👋 Salut Mon Maître"
+            "👋 Salut Mon Maître  \n"
         )  # pyright: ignore[reportAttributeAccessIssue]
         self.show_message(
-            "👀 Comment tu vas?"
+            "👀 Comment tu vas? \n"
         )  # pyright: ignore[reportAttributeAccessIssue]
         self.show_message(
             "Tu as bien dormi? 🤔\n"
