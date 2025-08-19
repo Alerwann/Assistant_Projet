@@ -1,4 +1,4 @@
-from tkinter import Tk, Label, Button, Text, Frame
+from tkinter import Tk,  Button, Text, Frame
 import sys
 import os
 from tkinter import PhotoImage
