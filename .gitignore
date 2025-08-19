@@ -1,0 +1,11 @@
+# Dossiers Python à ignorer
+build/
+dist/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Dossiers système à ignorer
+.DS_Store
+.vscode/

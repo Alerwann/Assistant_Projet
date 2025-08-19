@@ -1,3 +1,0 @@
-([('Assistant',
-   '/Users/alerwann/Desktop/apprentissage_python/Apprentissage_project/Apprentissage/Assistant_Projet/dist/Assistant',
-   'EXECUTABLE')],)
