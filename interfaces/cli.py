@@ -9,11 +9,12 @@ from logique.planning import must_send_message_cli
 from logique.applications import treatment_choice_app
 from config import BREAKFAST_TIMER_SECOND
 
+
 def assistant_cli():
     """
     Programme complet de l'assistant sans interface visuel
-    
-        Note: 
+
+        Note:
         Prends fin quand le timer du petit déjeuner est fini et que l'utilisateur ai choisi une activité
     """
     print("Salut je suis ton assistant préféré")

@@ -17,14 +17,14 @@ NOTION_PATH = "https://www.notion.so/D-penses-c83096354dfa422ba0d229a03693d676"
 CLAUDE_PATH = "https://claude.ai/recents"
 
 # ===WHATSAPP===
-CONVERSATION_NAME = 'marie guehl'
+CONVERSATION_NAME = 'Message du jour'
 
 # ===FICHIER===
 CSV_PATH = "/Users/alerwann/Desktop/menu.csv"
 ICON_PATH = "assets/icon_32.png"
 
 # ===TIMER==
-BREAKFAST_TIMER_SECOND = 120
+BREAKFAST_TIMER_SECOND = 180
 
 # ===INFORMATION SUR L'APPLICATION===
 APP_NAME = "Assistant Personnel"

@@ -4,21 +4,22 @@ from logique.notification import send_timer
 
 from config import BREAKFAST_TIMER_SECOND
 
+
 class WelcomMixin:
     def welcom_screen(self):
         """
         L'assistant demande pour accueillir si la personne à bien dormi
 
-        UI Elements : 
-            - yes_btn -> répond "oui" 
-            - no_btn -> répond "non" 
+        UI Elements :
+            - yes_btn -> répond "oui"
+            - no_btn -> répond "non"
 
         Actions:
             Relie la réponse à une phrase sympathique
         """
         # Lancer le timer
         send_timer(BREAKFAST_TIMER_SECOND, "breakfast")
-        self.create_progressBar('petit déjeuner', BREAKFAST_TIMER_SECOND)
+        self.create_progressBar("petit déjeuner", BREAKFAST_TIMER_SECOND)
 
         self.show_message(
             "👋 Salut Mon Maître  \n"
@@ -53,7 +54,7 @@ class WelcomMixin:
             - Recueil la réponse et traite
             - Nettoie les boutons
             - Relie à la méthode send_message
-            
+
         """
         # Import uniquement ici pour éviter les imports circulaires
 

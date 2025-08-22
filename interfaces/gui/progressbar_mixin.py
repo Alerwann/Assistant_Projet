@@ -4,6 +4,7 @@ from tkinter import  ttk, Label, Frame
 class ProgressBarMixin:
 
     def finish_progressbar(self, nom):
+        """Suppression de l'afficher du timer concerné"""
         self.progressbars_frame[nom].destroy()
         del self.progressbars_frame[nom]
 

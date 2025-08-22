@@ -5,7 +5,7 @@ a = Analysis(
     ['main.py'],
     pathex=[],
     binaries=[],
-    datas=[],
+    datas=[('assets/terminal-notifier', '.')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -19,16 +19,13 @@ pyz = PYZ(a.pure)
 exe = EXE(
     pyz,
     a.scripts,
-    a.binaries,
-    a.datas,
     [],
-    name='Assistant_V2',
+    exclude_binaries=True,
+    name='Assistant_V3.0.3',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
     upx=True,
-    upx_exclude=[],
-    runtime_tmpdir=None,
     console=False,
     disable_windowed_traceback=False,
     argv_emulation=False,
@@ -37,9 +34,18 @@ exe = EXE(
     entitlements_file=None,
     icon=['assets/icon.icns'],
 )
-app = BUNDLE(
+coll = COLLECT(
     exe,
-    name='Assistant_V2.app',
+    a.binaries,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='Assistant_V3.0.3',
+)
+app = BUNDLE(
+    coll,
+    name='Assistant_V3.0.3.app',
     icon='assets/icon.icns',
     bundle_identifier=None,
 )

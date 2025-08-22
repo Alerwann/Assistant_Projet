@@ -198,7 +198,7 @@ class WhatsAppMixin:
 
         # Calculer le délai en secondes
         delay = (hour_target - now).total_seconds()
-        send_timer(delay-30,'whatsapp')
+        send_timer(delay - 30, "whatsapp")
         self.create_progressBar("l'envoie de message", delay)
         # Attendre le délai
         time.sleep(delay)
