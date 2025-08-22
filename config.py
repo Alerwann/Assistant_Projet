@@ -24,9 +24,9 @@ CSV_PATH = "/Users/alerwann/Desktop/menu.csv"
 ICON_PATH = "assets/icon_32.png"
 
 # ===TIMER==
-BREAKFAST_TIMER_SECOND = 180
+BREAKFAST_TIMER_SECOND = 1800
 
 # ===INFORMATION SUR L'APPLICATION===
 APP_NAME = "Assistant Personnel"
-APP_VERSION = "1.0.0"
+APP_VERSION = "2.0.0"
 AUTHOR = "Alerwann"
