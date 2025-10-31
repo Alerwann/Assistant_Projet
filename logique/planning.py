@@ -65,10 +65,10 @@ def create_daily_message():
     evening = daily_planning.get("Menu du soir", "").strip() or "Pas de repas prévu"
     meeting = daily_planning.get("Rendez-vous", "").strip() or "Pas de rdv"
     cream = daily_planning.get("Crème du soir", "").strip() or "Demande moi au cas où"
-    love_message = (daily_planning.get("Message doux", "").strip() or "Je t'aime mon bébé d'amour"
+    love_message = (daily_planning.get("Message doux", "").strip() or "Je t'aime "
     )
     messsage = [current_day, midi, evening, meeting, cream, love_message]
-    # message=f"Coucou Bébé ❤️ \n C'est {current_day} aujourd'hui. À midi on manges : {midi}. Ce soir tu auras : {evening}. \n Les choses importantes pour aujourd'hui: {meeting}.\n Ce soir ce sera la crème {cream} pour ton torse.\n Et surtout n'oublie pas : {love_message}"
+   
     return messsage
 
 
